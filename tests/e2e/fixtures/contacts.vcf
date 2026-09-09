@@ -1,0 +1,22 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Smith;John;;Mr.;
+FN:Mr. John Smith
+EMAIL;TYPE=work:john@example.com
+TEL;TYPE=cell:+15715550101
+ADR;TYPE=home:;;123 Main St;Aldie;VA;20105;US
+ORG:Band Boosters
+NOTE:Active volunteer
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+N:Doe;Jane;;;
+FN:Jane Doe
+EMAIL:jane@example.com
+TEL:571-555-0102
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Robert Garcia
+EMAIL:robert@example.com
+END:VCARD

@@ -1,0 +1,933 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Neutral color palette - warmer grays */
+  --color-neutral-50: #fafaf9;
+  --color-neutral-100: #f5f5f4;
+  --color-neutral-200: #e7e5e4;
+  --color-neutral-300: #d6d3d1;
+  --color-neutral-400: #a8a29e;
+  --color-neutral-500: #78716c;
+  --color-neutral-600: #57534e;
+  --color-neutral-700: #44403c;
+  --color-neutral-800: #292524;
+  --color-neutral-900: #1c1917;
+  --color-neutral-950: #0c0a09;
+
+  /* Primary forest green palette - inspired by Audi Goodwood Green */
+  --color-primary-50: #f0fdf6;
+  --color-primary-100: #dcfce9;
+  --color-primary-200: #bbf7d4;
+  --color-primary-300: #86efab;
+  --color-primary-400: #4ade7f;
+  --color-primary-500: #22a558;
+  --color-primary-600: #16804d;
+  --color-primary-700: #15663d;
+  --color-primary-800: #14532d;
+  --color-primary-900: #1a3a2a;
+
+  /* Teal accent palette - fresh, modern */
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-200: #99f6e4;
+  --color-teal-300: #5eead4;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+  --color-teal-800: #115e59;
+  --color-teal-900: #134e4a;
+
+  /* Amber accent palette - warm, engaging */
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+  --color-amber-800: #92400e;
+  --color-amber-900: #78350f;
+
+  /* Rose/coral palette - for alerts and hearts */
+  --color-rose-50: #fff1f2;
+  --color-rose-100: #ffe4e6;
+  --color-rose-200: #fecdd3;
+  --color-rose-300: #fda4af;
+  --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+  --color-rose-600: #e11d48;
+  --color-rose-700: #be123c;
+  --color-rose-800: #9f1239;
+  --color-rose-900: #881337;
+
+  /* Emerald palette - success states (shifted warmer to differentiate from primary) */
+  --color-green-50: #ecfdf5;
+  --color-green-100: #d1fae5;
+  --color-green-200: #a7f3d0;
+  --color-green-300: #6ee7b7;
+  --color-green-400: #34d399;
+  --color-green-500: #10b981;
+  --color-green-600: #059669;
+  --color-green-700: #047857;
+  --color-green-800: #065f46;
+  --color-green-900: #064e3b;
+
+  /* Sage palette - secondary accent (lighter green complement) */
+  --color-violet-50: #f0fdf6;
+  --color-violet-100: #dcfce9;
+  --color-violet-200: #bbf7d4;
+  --color-violet-300: #86efab;
+  --color-violet-400: #4ade7f;
+  --color-violet-500: #22a558;
+  --color-violet-600: #16804d;
+  --color-violet-700: #15663d;
+  --color-violet-800: #14532d;
+  --color-violet-900: #1a3a2a;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --radius: 0.625rem;
+  --font-family-sans: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-family-instrument-sans: var(--font-instrument-sans), system-ui, sans-serif;
+  --font-family-instrument-serif: var(--font-instrument-serif), Georgia, serif;
+  --font-family-poppins: var(--font-poppins), system-ui, sans-serif;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+}
+
+@layer base {
+  :root {
+    --background: 30 6% 99%;
+    --foreground: 20 14% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14% 10%;
+    --primary: 153 70% 29%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 6% 96%;
+    --secondary-foreground: 20 14% 10%;
+    --muted: 30 6% 96%;
+    --muted-foreground: 20 8% 45%;
+    --accent: 174 84% 32%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 347 77% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 6% 90%;
+    --input: 30 6% 90%;
+    --ring: 153 70% 29%;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: #f8f9fa;
+    color: var(--color-foreground);
+    font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  /* ============================================
+   * DESIGN SYSTEM TOKENS
+   * All components should reference these utilities
+   * ============================================ */
+
+  /* -----------------------------------------
+   * BORDER RADIUS SCALE (Rounded - friendly feel)
+   * sm: 8px  - inputs, badges, small elements
+   * md: 12px - buttons, cards, containers
+   * lg: 16px - modals, large cards, feature sections
+   * full: 9999px - pills, avatars, circular elements
+   * ----------------------------------------- */
+  .radius-sm { border-radius: 8px; }
+  .radius-md { border-radius: 12px; }
+  .radius-lg { border-radius: 16px; }
+
+  /* -----------------------------------------
+   * SHADOW SCALE
+   * ----------------------------------------- */
+  .shadow-xs {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  }
+
+  /* Primary-colored shadow for CTAs */
+  .shadow-primary {
+    box-shadow:
+      0 4px 14px -3px rgba(22, 128, 77, 0.25),
+      0 2px 6px -2px rgba(22, 128, 77, 0.15);
+  }
+
+  .shadow-primary-hover {
+    box-shadow:
+      0 8px 20px -4px rgba(22, 128, 77, 0.3),
+      0 4px 8px -2px rgba(22, 128, 77, 0.2);
+  }
+
+  /* Larger soft shadow for elevated elements */
+  .shadow-lg-soft {
+    box-shadow:
+      0 10px 25px -5px rgba(0, 0, 0, 0.08),
+      0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Card shadow utilities - more subtle, modern */
+  .shadow-card {
+    box-shadow:
+      0 1px 2px 0 rgba(0, 0, 0, 0.03),
+      0 1px 6px -1px rgba(0, 0, 0, 0.02),
+      0 2px 4px 0 rgba(0, 0, 0, 0.02);
+  }
+
+  .shadow-card-hover {
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 2px 4px -2px rgba(0, 0, 0, 0.03),
+      0 0 0 1px rgba(0, 0, 0, 0.02);
+  }
+
+  .shadow-sm-soft {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  }
+
+  .shadow-md-soft {
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.06),
+      0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  }
+
+  /* -----------------------------------------
+   * HOVER EFFECT SYSTEM
+   * Consistent patterns across all components
+   * ----------------------------------------- */
+
+  /* Cards and elevated elements - subtle 2px lift */
+  .hover-lift {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Buttons - background darkens */
+  .hover-darken {
+    transition: background-color 0.15s ease-out,
+                box-shadow 0.15s ease-out;
+  }
+
+  /* List items, nav - subtle background tint */
+  .hover-highlight {
+    transition: background-color 0.15s ease-out;
+  }
+  .hover-highlight:hover {
+    background-color: var(--color-neutral-100);
+  }
+
+  /* -----------------------------------------
+   * FOCUS RING SYSTEM
+   * Unified ring-2 with consistent offset
+   * ----------------------------------------- */
+  .focus-ring-standard:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-primary-600);
+  }
+
+  /* -----------------------------------------
+   * SEMANTIC COLOR UTILITIES
+   * Progress/fill states and accent variants
+   * ----------------------------------------- */
+
+  /* Progress bar fill states */
+  .fill-excellent { background-color: var(--color-green-500); }
+  .fill-good { background-color: var(--color-teal-500); }
+  .fill-warning { background-color: var(--color-amber-500); }
+  .fill-low { background-color: var(--color-neutral-400); }
+
+  /* Accent card backgrounds */
+  .accent-purple-bg {
+    background: linear-gradient(135deg, var(--color-primary-50) 0%, #f0fdf6 100%);
+  }
+  .accent-teal-bg {
+    background: linear-gradient(135deg, var(--color-teal-50) 0%, #ecfeff 100%);
+  }
+  .accent-amber-bg {
+    background: linear-gradient(135deg, var(--color-amber-50) 0%, #fefce8 100%);
+  }
+  .accent-rose-bg {
+    background: linear-gradient(135deg, var(--color-rose-50) 0%, #fdf2f8 100%);
+  }
+
+  /* Accent icon colors */
+  .accent-purple-icon { color: var(--color-primary-600); }
+  .accent-teal-icon { color: var(--color-teal-600); }
+  .accent-amber-icon { color: var(--color-amber-600); }
+  .accent-rose-icon { color: var(--color-rose-600); }
+
+  /* Accent border colors */
+  .accent-purple-border { border-color: var(--color-primary-200); }
+  .accent-teal-border { border-color: var(--color-teal-200); }
+  .accent-amber-border { border-color: var(--color-amber-200); }
+  .accent-rose-border { border-color: var(--color-rose-200); }
+
+  /* Nav active indicator */
+  .nav-active-indicator {
+    position: absolute;
+    left: 0;
+    width: 3px;
+    height: 20px;
+    background-color: var(--color-neutral-900);
+    border-radius: 0 3px 3px 0;
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .transition-fast {
+    transition: all 0.15s ease-out;
+  }
+
+  /* Premium typography utilities */
+  .heading-display {
+    letter-spacing: -0.025em;
+    font-feature-settings: "ss01" on, "ss02" on, "cv01" on;
+  }
+
+  .heading-tight {
+    letter-spacing: -0.015em;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Stat card icon backgrounds - color-coded */
+  .icon-bg-blue {
+    background-color: #eff6ff;
+  }
+
+  .icon-bg-rose {
+    background-color: #fff1f2;
+  }
+
+  .icon-bg-teal {
+    background-color: #f0fdfa;
+  }
+
+  .icon-bg-violet {
+    background-color: #f5f3ff;
+  }
+
+  .icon-bg-amber {
+    background-color: #fffbeb;
+  }
+
+  .icon-bg-green {
+    background-color: #f0fdf4;
+  }
+
+  /* Interactive card states */
+  .card-interactive {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-interactive:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Badge color utilities */
+  .badge-success {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+
+  .badge-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+
+  .badge-info {
+    background-color: #dbeafe;
+    color: #1e40af;
+  }
+
+  .badge-neutral {
+    background-color: #f5f5f4;
+    color: #57534e;
+  }
+
+  /* Status dot indicators */
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .status-dot-success {
+    background-color: #22c55e;
+  }
+
+  .status-dot-warning {
+    background-color: #f59e0b;
+  }
+
+  .status-dot-danger {
+    background-color: #f43f5e;
+  }
+
+  .status-dot-info {
+    background-color: #3b82f6;
+  }
+
+  /* Activity timeline styling */
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    bottom: -16px;
+    width: 1px;
+    background-color: #e7e5e4;
+  }
+
+  .timeline-item:last-child::before {
+    display: none;
+  }
+
+  /* Empty state illustration placeholder */
+  .empty-state-icon {
+    background: linear-gradient(135deg, #f5f5f4 0%, #fafaf9 100%);
+    border: 1px dashed #d6d3d1;
+  }
+
+  /* Quick action button styling */
+  .quick-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e7e5e4;
+    background-color: white;
+    color: #1c1917;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.15s ease-out;
+    width: 100%;
+    text-align: left;
+  }
+
+  .quick-action-btn:hover {
+    border-color: #d6d3d1;
+    background-color: #fafaf9;
+  }
+
+  /* Divider utilities */
+  .divider-light {
+    border-top: 1px solid #f5f5f4;
+  }
+
+  /* Compact card header for dashboard */
+  .card-header-compact {
+    padding: 1rem 1.25rem 0.75rem;
+  }
+
+  .card-content-compact {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  /* Progress bar styling */
+  .progress-bar {
+    height: 4px;
+    border-radius: 2px;
+    background-color: #e7e5e4;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease-out;
+  }
+
+  /* Subtle hover backgrounds */
+  .hover-bg-subtle:hover {
+    background-color: #fafaf9;
+  }
+
+  /* Focus ring styling */
+  .focus-ring {
+    outline: none;
+  }
+
+  /* Hide scrollbar for horizontal scroll containers */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Gradient utilities */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #16804d 0%, #14532d 100%);
+  }
+
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, #f0fdf6 0%, #f0fdfa 100%);
+  }
+
+  .text-gradient-primary {
+    background: linear-gradient(135deg, #16804d 0%, #0f5132 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Blob decorations for auth pages */
+  .blob-purple {
+    background: linear-gradient(135deg, #bbf7d4 0%, #86efab 100%);
+  }
+
+  .blob-pink {
+    background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%);
+  }
+
+  /* Blob animation keyframes */
+  @keyframes blob-float {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.05);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.95);
+    }
+  }
+
+  .animate-blob {
+    animation: blob-float 7s ease-in-out infinite;
+  }
+
+  .animate-blob-delay {
+    animation: blob-float 7s ease-in-out 2s infinite;
+  }
+
+  /* Typography scale utilities */
+  .text-display {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+
+  .text-page-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+  }
+
+  .text-section-title {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+
+  .text-card-title {
+    font-size: 1.125rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .text-body-large {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .text-body {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .text-body-small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .text-caption {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  /* Focus ring styling - updated for primary purple */
+  .focus-ring:focus-visible {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #16804d;
+  }
+
+  /* Flora Mascot Animations */
+  @keyframes flora-sway {
+    0%, 100% {
+      transform: rotate(-2deg);
+    }
+    50% {
+      transform: rotate(2deg);
+    }
+  }
+
+  @keyframes flora-blink {
+    0%, 45%, 55%, 100% {
+      transform: scaleY(1);
+    }
+    50% {
+      transform: scaleY(0.1);
+    }
+  }
+
+  @keyframes flora-wave {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-15deg);
+    }
+    75% {
+      transform: rotate(15deg);
+    }
+  }
+
+  @keyframes flora-float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  @keyframes flora-bounce {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes flora-pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  .flora-sway {
+    animation: flora-sway 3s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+
+  .flora-blink {
+    animation: flora-blink 4s ease-in-out infinite;
+  }
+
+  .flora-wave {
+    animation: flora-wave 1s ease-in-out;
+    transform-origin: bottom center;
+  }
+
+  .flora-float {
+    animation: flora-float 2s ease-in-out infinite;
+  }
+
+  .flora-bounce {
+    animation: flora-bounce 0.6s ease-in-out;
+  }
+
+  .flora-pulse {
+    animation: flora-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes flora-leaf-wave {
+    0%, 100% {
+      transform: rotate(0deg) translateX(0);
+    }
+    25% {
+      transform: rotate(-8deg) translateX(-2px);
+    }
+    75% {
+      transform: rotate(8deg) translateX(2px);
+    }
+  }
+
+  .flora-leaf-wave {
+    animation: flora-leaf-wave 0.8s ease-in-out infinite;
+    transform-origin: right center;
+  }
+
+  /* Reduced motion support for Flora animations */
+  @media (prefers-reduced-motion: reduce) {
+    .flora-sway,
+    .flora-blink,
+    .flora-wave,
+    .flora-float,
+    .flora-bounce,
+    .flora-pulse,
+    .flora-leaf-wave {
+      animation: none;
+    }
+  }
+
+  /* Hero appear animation */
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-appear {
+    animation: appear 0.6s cubic-bezier(0.2, 0.85, 0.45, 1) forwards;
+  }
+
+  /* Greeting animations */
+  @keyframes greeting-slide-in {
+    0% {
+      opacity: 0;
+      transform: translateX(-12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes greeting-fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes greeting-slide-right {
+    0% {
+      opacity: 0;
+      transform: translateX(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-greeting {
+    animation: greeting-slide-in 0.5s cubic-bezier(0.2, 0.85, 0.45, 1) forwards;
+  }
+
+  .animate-greeting-fade {
+    animation: greeting-fade-in 0.6s ease-out 0.15s forwards;
+    opacity: 0;
+  }
+
+  .animate-greeting-date {
+    animation: greeting-slide-right 0.5s cubic-bezier(0.2, 0.85, 0.45, 1) 0.1s forwards;
+    opacity: 0;
+  }
+
+  /* Reduced motion support for greeting animations */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-greeting,
+    .animate-greeting-fade,
+    .animate-greeting-date {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .delay-700 {
+    animation-delay: 700ms;
+  }
+
+
+  /* Instrument font utilities */
+  .font-instrument-sans {
+    font-family: var(--font-instrument-sans), system-ui, sans-serif;
+  }
+
+  .font-instrument-serif {
+    font-family: var(--font-instrument-serif), Georgia, serif;
+  }
+
+  .font-poppins {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+  }
+
+  /* Reduced motion support for appear animation */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-appear {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
+  /* Shimmer animation for AI tile loading states */
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* AI tile specific animations */
+  @keyframes pulse-ring {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0;
+      transform: scale(1.2);
+    }
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 2s ease-in-out infinite;
+  }
+
+
+  /* Empty state floating animations */
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(-8px) translateX(4px);
+      opacity: 1;
+    }
+  }
+
+  @keyframes float-medium {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(-6px) translateX(-3px);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes float-fast {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translateY(-4px) translateX(2px);
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes gentle-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 0.95;
+    }
+  }
+
+  .animate-float-slow {
+    animation: float-slow 4s ease-in-out infinite;
+  }
+
+  .animate-float-medium {
+    animation: float-medium 3s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  .animate-float-fast {
+    animation: float-fast 2.5s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  .animate-gentle-pulse {
+    animation: gentle-pulse 3s ease-in-out infinite;
+  }
+
+  /* Reduced motion support for empty state animations */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float-slow,
+    .animate-float-medium,
+    .animate-float-fast,
+    .animate-gentle-pulse {
+      animation: none;
+    }
+  }
+
+
+}
