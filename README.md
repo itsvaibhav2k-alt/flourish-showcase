@@ -32,6 +32,10 @@ npm run test:e2e
 
 Browser tests require the test environment described by the Playwright configuration. Database scripts require explicit environment configuration and should only be run against a database you intend to modify.
 
+## Verification status
+
+The offline credential-guard suite passes (`npm run test:env-guards`). The full application typecheck currently fails, so this is work-in-progress source, not a verified turnkey deployment. Browser and provider-backed workflows require separate setup and testing.
+
 ## About this repository
 
 This is a public source snapshot. Private development history, credentials, and internal screenshots are not included. The dashboard preview has been sanitized and is labeled illustrative. The repository does not include access to a hosted workspace or configured provider accounts.
